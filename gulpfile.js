@@ -1,8 +1,10 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var jade = require('gulp-jade');
+var sass=require('gulp-sass');
 var rjs = require('gulp-requirejs');
-// add required packages
+var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
 
 gulp.task('connect', function() {
 	connect.server({
@@ -21,6 +23,10 @@ gulp.task('jade', function() {
 
 gulp.task('sass', function() {
 	// implement sass task
+	gulp.src('src/sass/*.sass')
+		.pipe(sass())
+		.pipe(gulp.dest('dist/css'))
+		.pipe(connect.reload());
 });
 
 gulp.task('requireJS', function() {
@@ -33,13 +39,21 @@ gulp.task('requireJS', function() {
 		out: 'bundle.js',
 		wrap: true
 	})
+	.pipe(uglify())
 	.pipe(gulp.dest('dist/js'))
 	.pipe(connect.reload());
 });
 
 gulp.task('watch', function() {
 	gulp.watch('src/jade/*.jade', ['jade']);
-	// add watch for .sass and .js files
+
+	// watch for .sass and .js files
+	gulp.watch('src/sass/*.sass', function(event) {
+		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+	});
+	gulp.watch('src/js/*.js', function(event) {
+		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+	});
 });
 
 gulp.task('default', ['requireJS', 'jade', 'sass', 'connect', 'watch']);
