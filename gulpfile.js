@@ -48,12 +48,8 @@ gulp.task('watch', function() {
 	gulp.watch('src/jade/*.jade', ['jade']);
 
 	// watch for .sass and .js files
-	gulp.watch('src/sass/*.sass', function(event) {
-		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-	});
-	gulp.watch('src/js/*.js', function(event) {
-		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-	});
+	gulp.watch('src/sass/*.sass', ['sass']);
+	gulp.watch('src/js/*.js', ['requireJS']);
 });
 
 gulp.task('default', ['requireJS', 'jade', 'sass', 'connect', 'watch']);
