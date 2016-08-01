@@ -14,4 +14,4 @@ At the end Gulp should watch all files within the **src** folder and reload the 
 
 Completed Task should look as follows:
 
-![screenshot](https://raw.githubusercontent.com/jacobator/bsa-tooling-task/master/meta/page.png)
+![screenshot](https://raw.githubusercontent.com/jacobator/bsa-tooling-task/master/meta/page.png)# bsa_tooling_tasks
